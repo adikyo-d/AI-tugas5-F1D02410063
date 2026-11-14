@@ -76,10 +76,10 @@ Semua kasus lulus (`python sensor_pakar.py --uji kasus_uji.json` -> `4/4 kasus l
 
 
 
-![Kasus 1](screenshot/kasus1.png)
-![Kasus 2](screenshot/kasus2.png)
-![Kasus 3 ](screenshot/kasus3.png)
-![Kasus 4 (negatif)](screenshot/kasus3.png)
+![Kasus 1](Screenshot/kasus1.png)
+![Kasus 2](Screenshot/kasus2.png)
+![Kasus 3 ](Screenshot/kasus3.png)
+![Kasus 4 (negatif)](Screenshot/kasus3.png)
 
 ## 5. Batas Keberlakuan
 
