@@ -1,0 +1,14 @@
+[
+  {"no": 1, "nama": "Target kain atau busa", "ya": ["benda berupa kain, busa, atau permukaan lunak"],
+   "diharapkan": ["SARAN: arahkan sensor tegak lurus ke permukaan keras dan rata, atau ganti target"]},
+  {"no": 2, "nama": "Target terlalu jauh dan jalur terhalang", "ya": ["benda lebih dekat dari 2 cm atau lebih jauh dari 400 cm", "ada benda lain di jalur sinyal"],
+   "diharapkan": [
+     "SARAN: pindahkan target ke rentang 2 cm sampai 400 cm dari sensor",
+     "SARAN: bersihkan muka sensor dan singkirkan benda yang menghalangi jalur sinyal"]},
+  {"no": 3, "nama": "Trigger pendek, suhu berubah, permukaan miring", "ya": ["pulsa trigger kurang dari 10 mikrodetik", "suhu udara berubah banyak", "permukaan benda miring terhadap sensor"],
+   "diharapkan": [
+     "SARAN: pastikan pulsa trigger minimal 10 mikrodetik dan sensor mendapat catu 5 V",
+     "SARAN: perhitungan jarak perlu memperhitungkan suhu udara karena akurasi dipengaruhi suhu",
+     "SARAN: arahkan sensor tegak lurus ke permukaan keras dan rata, atau ganti target"]},
+  {"no": 4, "nama": "Tidak ada masalah (kasus negatif)", "ya": [], "diharapkan": []}
+]

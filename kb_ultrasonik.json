@@ -1,0 +1,32 @@
+{
+  "judul": "Penyebab bacaan jarak sensor ultrasonik HC-SR04 salah atau tidak stabil",
+  "batas": "Aturan berasal dari datasheet HC-SR04 (ElecFreaks), catatan aplikasi Texas Instruments, dan artikel teknis MaxBotix, hanya untuk sensor ultrasonik jenis HC-SR04 yang dihubungkan ke mikrokontroler seperti Arduino atau ESP32. Sebagian aturan tentang perilaku gelombang ultrasonik berasal dari sumber umum (bukan khusus HC-SR04) dan diterapkan ke HC-SR04. Aturan tidak mencakup kerusakan fisik sensor atau kesalahan pada kode perhitungan. Hasilnya saran awal, bukan keputusan akhir.",
+  "sumber": {
+    "S1": "Ultrasonic Ranging Module HC-SR04 Datasheet, ElecFreaks, https://www.radiolocman.com/datasheet/pdf.html?di=168043, dokumen terbit sekitar Maret 2020, diakses 14 Nov 2026",
+    "S2": "Ultrasonic sensors: Advantages and Limitations, MaxBotix Inc., https://maxbotix.com/blogs/blog/advantages-limitations-ultrasonic-sensors, diakses 14 Nov 2026",
+    "S3": "Texas Instruments, application note SLAA907 (dasar sensor ultrasonik dan jenis target yang sulit dideteksi), https://ti.com/document-viewer/lit/html/SLAA907, diakses 14 Nov 2026",
+    "S4": "What Affects Ultrasonic Tank Sensor Accuracy?, MaxBotix Inc., https://maxbotix.com/blogs/blog/what-affects-ultrasonic-tank-sensor-accuracy, diakses 14 Nov 2026"
+  },
+  "pertanyaan": {
+    "benda lebih dekat dari 2 cm atau lebih jauh dari 400 cm": "Apakah benda yang diukur lebih dekat dari 2 cm atau lebih jauh dari 400 cm?",
+    "benda berupa kain, busa, atau permukaan lunak": "Apakah benda yang diukur berupa kain, busa, atau permukaan lunak?",
+    "permukaan benda miring terhadap sensor": "Apakah permukaan benda miring terhadap sensor?",
+    "benda tidak lurus di depan sensor (di luar sudut sekitar 15 derajat)": "Apakah benda tidak lurus di depan sensor (di luar sudut sekitar 15 derajat)?",
+    "ada benda lain di jalur sinyal": "Apakah ada benda lain di jalur sinyal (dinding, braket, kabel)?",
+    "muka sensor tertutup kotoran atau embun": "Apakah muka sensor tertutup kotoran atau embun?",
+    "pulsa trigger kurang dari 10 mikrodetik": "Apakah pulsa trigger kurang dari 10 mikrodetik?",
+    "tegangan suplai bukan 5 V": "Apakah tegangan suplai sensor bukan 5 V?",
+    "suhu udara berubah banyak": "Apakah suhu udara berubah banyak (sekitar 5-10 derajat atau lebih)?"
+  },
+  "aturan": [
+    {"id": "R1", "jika": ["benda lebih dekat dari 2 cm atau lebih jauh dari 400 cm"], "mode": "dan", "maka": "target di luar jangkauan ukur", "sumber": "S1"},
+    {"id": "R2", "jika": ["benda berupa kain, busa, atau permukaan lunak", "permukaan benda miring terhadap sensor", "benda tidak lurus di depan sensor (di luar sudut sekitar 15 derajat)"], "mode": "atau", "maka": "echo target lemah", "sumber": "S1, S2, S3, S4"},
+    {"id": "R3", "jika": ["ada benda lain di jalur sinyal", "muka sensor tertutup kotoran atau embun"], "mode": "atau", "maka": "jalur sinyal terganggu", "sumber": "S4"},
+    {"id": "R4", "jika": ["pulsa trigger kurang dari 10 mikrodetik", "tegangan suplai bukan 5 V"], "mode": "atau", "maka": "pemicu atau daya tidak sesuai spesifikasi", "sumber": "S1"},
+    {"id": "R5", "jika": ["echo target lemah"], "mode": "dan", "maka": "SARAN: arahkan sensor tegak lurus ke permukaan keras dan rata, atau ganti target", "sumber": "S3, S4"},
+    {"id": "R6", "jika": ["target di luar jangkauan ukur"], "mode": "dan", "maka": "SARAN: pindahkan target ke rentang 2 cm sampai 400 cm dari sensor", "sumber": "S1"},
+    {"id": "R7", "jika": ["jalur sinyal terganggu"], "mode": "dan", "maka": "SARAN: bersihkan muka sensor dan singkirkan benda yang menghalangi jalur sinyal", "sumber": "S4"},
+    {"id": "R8", "jika": ["pemicu atau daya tidak sesuai spesifikasi"], "mode": "dan", "maka": "SARAN: pastikan pulsa trigger minimal 10 mikrodetik dan sensor mendapat catu 5 V", "sumber": "S1"},
+    {"id": "R9", "jika": ["suhu udara berubah banyak"], "mode": "dan", "maka": "SARAN: perhitungan jarak perlu memperhitungkan suhu udara karena akurasi dipengaruhi suhu", "sumber": "S2"}
+  ]
+}
